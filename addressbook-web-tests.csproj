@@ -17,4 +17,9 @@
     <PackageReference Include="Selenium.Chrome.WebDriver" Version="85.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="tests\" />
+    <Folder Include="model\" />
+    <Folder Include="appmanager\" />
+  </ItemGroup>
 </Project>
