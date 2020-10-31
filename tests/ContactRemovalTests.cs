@@ -4,12 +4,12 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : AuthTestBase
+    public class ContactRemovalTests : TestBase
     {
         [Test]
         public void ContactRemovalTest()
         {
-            app.Contacts.Remove(2);
+            app.Contacts.Remove(6);
         }
     }
 }

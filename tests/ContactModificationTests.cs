@@ -1,11 +1,10 @@
 ﻿using System;
 using NUnit.Framework;
-using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : TestBase
     {
         [Test]
         public void ContactModificationTest()
