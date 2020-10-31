@@ -23,25 +23,48 @@ namespace WebAddressbookTests
 
         public ContactHelper Modify(int v, ContactData newContact)
         {
-            InitContactModification(v);
+            if (!InitContactModification(v))
+            {
+                Create(newContact);
+                Modify(v, newContact);
+                return this;
+            }
+
             FillContactForm(newContact);
             SubmitContactModification();
             ReturnToHomePage();
+            
             return this;
         }
 
         public ContactHelper Remove(int v)
         {
-            SelectContact(v);
+            if (!SelectContact(v))
+            {
+                ContactData contact = new ContactData("a", "c");
+                Create(contact);
+                Remove(v);
+                return this;
+            }
+
             RemoveContact();
             driver.SwitchTo().Alert().Accept();
             return this;
         }
 
-        public ContactHelper SelectContact(int v)
+        public bool SelectContact(int v)
         {
-            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + v + "]/td/input")).Click();
-            return this;
+            By selectedContact = By.XPath("//table[@id='maintable']/tbody/tr[" + v + "]/td/input");
+
+            if (IsElementPresent(selectedContact))
+            {
+                driver.FindElement(selectedContact).Click();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public ContactHelper RemoveContact()
@@ -56,10 +79,19 @@ namespace WebAddressbookTests
             return this;
         }
 
-        public ContactHelper InitContactModification(int index)
+        public bool InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
-            return this;
+            By modifiedContact = By.XPath("(//img[@alt='Edit'])[" + index + "]");
+
+            if (IsElementPresent(modifiedContact))
+            {
+                driver.FindElement(modifiedContact).Click();
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public ContactHelper FillContactForm(ContactData contact)
