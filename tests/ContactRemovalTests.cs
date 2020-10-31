@@ -4,12 +4,19 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactRemovalTests : TestBase
+    public class ContactRemovalTests : AuthTestBase
     {
         [Test]
         public void ContactRemovalTest()
         {
-            app.Contacts.Remove(6);
+            int removedIndex = 2;
+
+            if (!app.Contacts.IsContactExist(removedIndex))
+            {
+                ContactData contact = new ContactData("a", "c");
+                app.Contacts.Create(contact);
+            }
+            app.Contacts.Remove(removedIndex);
         }
     }
 }

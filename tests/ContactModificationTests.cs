@@ -1,10 +1,11 @@
 ﻿using System;
 using NUnit.Framework;
+using OpenQA.Selenium;
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : TestBase
+    public class ContactModificationTests : AuthTestBase
     {
         [Test]
         public void ContactModificationTest()
@@ -34,7 +35,14 @@ namespace WebAddressbookTests
             newContact.Phone2 = "OdessaNewTest";
             newContact.Notes = "201 symbols test";
 
-            app.Contacts.Modify(2, newContact);
+            int modifiedIndex = 2;
+
+            if (!app.Contacts.IsContactExist(modifiedIndex))
+            {
+                app.Contacts.Create(newContact);
+            }
+
+            app.Contacts.Modify(modifiedIndex, newContact);
         }
     }
 }
