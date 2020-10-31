@@ -13,7 +13,14 @@ namespace WebAddressbookTests
             newData.Header = null;
             newData.Footer = null;
 
-            app.Groups.Modify(1, newData);
+            int modifiedIndex = 1;
+
+            if (!app.Groups.IsGroupExist(modifiedIndex))
+            {
+                app.Groups.Create(newData);
+            }
+
+            app.Groups.Modify(modifiedIndex, newData);
         }
     }
 }

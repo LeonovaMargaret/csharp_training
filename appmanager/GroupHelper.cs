@@ -80,6 +80,11 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool IsGroupExist(int index)
+        {
+            return IsElementPresent(By.XPath("(//input[@name='selected[]'])[" + index + "]"));
+        }
+
         public GroupHelper RemoveGroup()
         {
             driver.FindElement(By.Name("delete")).Click();

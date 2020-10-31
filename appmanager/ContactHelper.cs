@@ -44,6 +44,11 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public bool IsContactExist (int v)
+        {
+            return IsElementPresent(By.XPath("//table[@id='maintable']/tbody/tr[" + v + "]/td/input"));
+        }
+
         public ContactHelper RemoveContact()
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
@@ -58,7 +63,7 @@ namespace WebAddressbookTests
 
         public ContactHelper InitContactModification(int index)
         {
-            driver.FindElement(By.XPath("(//img[@alt='Edit'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("//table[@id='maintable']/tbody/tr[" + index + "]/td[8]/a/img")).Click();
             return this;
         }
 
