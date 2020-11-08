@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 
@@ -42,7 +43,18 @@ namespace WebAddressbookTests
                 app.Contacts.Create(newContact);
             }
 
+            List<ContactData> oldContacts = app.Contacts.GetContactList();
+
             app.Contacts.Modify(modifiedIndex, newContact);
+
+            List<ContactData> newContacts = app.Contacts.GetContactList();
+
+            oldContacts[modifiedIndex - 1].Firstname = newContact.Firstname;
+            oldContacts[modifiedIndex - 1].Lastname = newContact.Lastname;
+
+            oldContacts.Sort();
+            newContacts.Sort();
+            Assert.AreEqual(oldContacts, newContacts);
         }
     }
 }

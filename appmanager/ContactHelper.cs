@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
@@ -53,6 +54,24 @@ namespace WebAddressbookTests
         {
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             return this;
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+
+            manager.Navigator.GoToHomePage();
+
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name = 'entry']"));
+
+            foreach (IWebElement element in elements)
+            {
+                IWebElement lastName = element.FindElement(By.XPath("./td[2]"));
+                IWebElement firstName = element.FindElement(By.XPath("./td[3]"));
+                contacts.Add(new ContactData(firstName.Text, lastName.Text));
+            }
+
+            return contacts;
         }
 
         public ContactHelper InitContactCreation()
