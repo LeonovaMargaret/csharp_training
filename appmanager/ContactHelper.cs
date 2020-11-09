@@ -36,6 +36,7 @@ namespace WebAddressbookTests
             SelectContact(v);
             RemoveContact();
             driver.SwitchTo().Alert().Accept();
+            contactCache = null;
             return this;
         }
 
@@ -56,22 +57,24 @@ namespace WebAddressbookTests
             return this;
         }
 
+        private List<ContactData> contactCache = null;
+
         public List<ContactData> GetContactList()
         {
-            List<ContactData> contacts = new List<ContactData>();
-
-            manager.Navigator.GoToHomePage();
-
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name = 'entry']"));
-
-            foreach (IWebElement element in elements)
+            if(contactCache == null)
             {
-                IWebElement lastName = element.FindElement(By.XPath("./td[2]"));
-                IWebElement firstName = element.FindElement(By.XPath("./td[3]"));
-                contacts.Add(new ContactData(firstName.Text, lastName.Text));
+                contactCache = new List<ContactData>();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath("//tr[@name = 'entry']"));
+                foreach (IWebElement element in elements)
+                {
+                    IWebElement lastName = element.FindElement(By.XPath("./td[2]"));
+                    IWebElement firstName = element.FindElement(By.XPath("./td[3]"));
+                    contactCache.Add(new ContactData(firstName.Text, lastName.Text));
+                }
+
             }
 
-            return contacts;
+            return contactCache;
         }
 
         public ContactHelper InitContactCreation()
@@ -120,12 +123,14 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactCreation()
         {
             driver.FindElement(By.XPath("(//input[@name='submit'])[2]")).Click();
+            contactCache = null;
             return this;
         }
 
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCache = null;
             return this;
         }
 
