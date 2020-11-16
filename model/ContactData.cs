@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Text.RegularExpressions;
+
 namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
@@ -27,6 +29,8 @@ namespace WebAddressbookTests
         private string address2 = "";
         private string phone2 = "";
         private string notes = "";
+        private string allPhones;
+        private string allEmails;
 
         public ContactData(string firstname, string lastname)
         {
@@ -58,6 +62,53 @@ namespace WebAddressbookTests
         public string Address2 { get => address2; set => address2 = value; }
         public string Phone2 { get => phone2; set => phone2 = value; }
         public string Notes { get => notes; set => notes = value; }
+
+        public string AllPhones
+        {
+            get
+            {
+                if(allPhones != null)
+                {
+                    return allPhones;
+                }
+                else
+                {
+                    return (CleanUp(Home) + CleanUp(Mobile) + CleanUp(Work) + CleanUp(Phone2)).Trim();
+                }
+            }
+            set
+            {
+                allPhones = value;
+            }
+        }
+
+        public string AllEmails
+        {
+            get
+            {
+                if (allEmails != null)
+                {
+                    return allEmails;
+                }
+                else
+                {
+                    return (CleanUp(Email) + CleanUp(Email2) + CleanUp(Email3)).Trim();
+                }
+            }
+            set
+            {
+                allEmails = value;
+            }
+        }
+
+        private string CleanUp(string phone)
+        {
+            if (phone == null || phone == "")
+            {
+                return "";
+            }
+            return Regex.Replace(phone, "[ -()]", "") + "\n";
+        }
 
         public int CompareTo(ContactData other)
         {
