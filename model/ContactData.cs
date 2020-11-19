@@ -5,9 +5,9 @@ namespace WebAddressbookTests
 {
     public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
-        private string firstname;
+        private string firstname = "";
         private string middlename = "";
-        private string lastname;
+        private string lastname = "";
         private string nickname = "";
         private string title = "";
         private string company = "";
