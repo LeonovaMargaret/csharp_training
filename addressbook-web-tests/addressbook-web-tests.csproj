@@ -1,0 +1,43 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>addressbook_web_tests</RootNamespace>
+
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.8.0" />
+    <PackageReference Include="Selenium.Support" Version="3.141.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+    <PackageReference Include="NUnit" Version="3.12.0" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
+    <PackageReference Include="Selenium.Firefox.WebDriver" Version="0.27.0" />
+    <PackageReference Include="Selenium.Chrome.WebDriver" Version="85.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="tests\" />
+    <Folder Include="model\" />
+    <Folder Include="appmanager\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="addressbook-test-data-generators\Program.cs" />
+    <Compile Remove="addressbook-test-data-generators\obj\Debug\.NETFramework,Version=v4.7.2.AssemblyAttributes.cs" />
+    <Compile Remove="addressbook-test-data-generators\Properties\AssemblyInfo.cs" />
+    <Compile Remove="addressbook-test-data-generators\Program.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="addressbook-test-data-generators\obj\Debug\addressbook-test-data-generators.csproj.FileListAbsolute.txt" />
+    <None Remove="addressbook-test-data-generators\obj\Debug\addressbook-test-data-generators.csproj.CoreCompileInputs.cache" />
+    <None Remove="addressbook-test-data-generators\obj\Debug\addressbook-test-data-generators.csprojAssemblyReference.cache" />
+    <None Remove="addressbook-test-data-generators\obj\project.nuget.cache" />
+    <None Remove="addressbook-test-data-generators\obj\addressbook-test-data-generators.csproj.nuget.g.targets" />
+    <None Remove="addressbook-test-data-generators\obj\addressbook-test-data-generators.csproj.nuget.g.props" />
+    <None Remove="addressbook-test-data-generators\obj\project.assets.json" />
+    <None Remove="addressbook-test-data-generators\obj\addressbook-test-data-generators.csproj.nuget.dgspec.json" />
+    <None Remove="addressbook-test-data-generators\obj\Debug\net5.0\addressbook-test-data-generators.assets.cache" />
+    <None Remove="addressbook-test-data-generators\obj\Debug\net5.0\addressbook-test-data-generators.csprojAssemblyReference.cache" />
+  </ItemGroup>
+</Project>
