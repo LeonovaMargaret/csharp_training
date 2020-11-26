@@ -41,4 +41,18 @@
     <None Remove="addressbook-test-data-generators\obj\Debug\net5.0\addressbook-test-data-generators.assets.cache" />
     <None Remove="addressbook-test-data-generators\obj\Debug\net5.0\addressbook-test-data-generators.csprojAssemblyReference.cache" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="groups.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="groups.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="contacts.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="contacts.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>
