@@ -12,8 +12,6 @@ namespace addressbook_test_data_generators
     {
         static void Main(string[] args)
         {
-            //need to change args[x] after implementing 2 generators: XML and JSON
-
             string type = args[0];
             int count = Convert.ToInt32(args[1]);
             StreamWriter writer = new StreamWriter(args[2]);
