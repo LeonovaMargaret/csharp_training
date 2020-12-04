@@ -6,7 +6,7 @@ using OpenQA.Selenium;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class ContactModificationTests : AuthTestBase
+    public class ContactModificationTests : ContactTestBase
     {
         [Test]
         public void ContactModificationTest()
@@ -43,14 +43,14 @@ namespace WebAddressbookTests
                 app.Contacts.Create(newContact);
             }
 
-            List<ContactData> oldContacts = app.Contacts.GetContactList();
+            List<ContactData> oldContacts = ContactData.GetAll();
 
-            app.Contacts.Modify(modifiedIndex, newContact);
+            app.Contacts.Modify(oldContacts[modifiedIndex], newContact);
 
-            List<ContactData> newContacts = app.Contacts.GetContactList();
+            List<ContactData> newContacts = ContactData.GetAll();
 
-            oldContacts[modifiedIndex - 1].Firstname = newContact.Firstname;
-            oldContacts[modifiedIndex - 1].Lastname = newContact.Lastname;
+            oldContacts[modifiedIndex].Firstname = newContact.Firstname;
+            oldContacts[modifiedIndex].Lastname = newContact.Lastname;
 
             oldContacts.Sort();
             newContacts.Sort();

@@ -8,12 +8,12 @@ using System.Collections.Generic;
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupRemovalTests : AuthTestBase
+    public class GroupRemovalTests : GroupTestBase
     {
         [Test]
         public void GroupRemovalTest()
         {
-            int removedIndex = 1;
+            int removedIndex = 0;
 
             if (!app.Groups.IsGroupExist(removedIndex))
             {
@@ -21,11 +21,14 @@ namespace WebAddressbookTests
                 app.Groups.Create(group);
             }
 
-            List<GroupData> oldGroups = app.Groups.GetGroupList();
-            app.Groups.Remove(removedIndex);
-            List<GroupData> newGroups = app.Groups.GetGroupList();
-            GroupData toBeRemoved = oldGroups[removedIndex - 1];
-            oldGroups.RemoveAt(removedIndex - 1);
+            List<GroupData> oldGroups = GroupData.GetAll();
+            GroupData toBeRemoved = oldGroups[removedIndex];
+
+            app.Groups.Remove(toBeRemoved);
+
+            List<GroupData> newGroups = GroupData.GetAll();
+            oldGroups.RemoveAt(removedIndex);
+
             Assert.AreEqual(oldGroups, newGroups);
 
             foreach (GroupData group in newGroups)
