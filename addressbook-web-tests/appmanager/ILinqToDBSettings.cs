@@ -29,7 +29,7 @@ namespace WebAddressbookTests
                     {
                         Name = "AddressBook",
                         ProviderName = "MySql.Data.MySqlClient",
-                        ConnectionString = @"Server=localhost;Port=3306;Database=addressbook;Uid=root;Pwd=;charset=utf8;"
+                        ConnectionString = @"Server=localhost;Port=3306;Database=addressbook;Uid=root;Pwd=;charset=utf8;Allow Zero Datetime = true"
                     };
             }
         }
